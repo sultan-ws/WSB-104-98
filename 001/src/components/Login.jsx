@@ -1,8 +1,14 @@
 import { child, get, getDatabase, ref } from 'firebase/database';
-import React from 'react'
+import React, { useContext } from 'react'
 import { app } from '../assests/FirebaseConfig';
+import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { myContext } from '../assests/Context';
 
 const Login = () => {
+  const nav = useNavigate();
+
+  const {setAdminLoggedIn} = useContext(myContext);
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -24,6 +30,10 @@ const Login = () => {
         eamil:databaseUser.email
       };
 
+      Cookies.set('admin-data', JSON.stringify(adminData), {expires: 10});
+      setAdminLoggedIn(true)
+      nav('/admin');
+
       // console.log(response.val());
     }
     catch (error) {
@@ -44,6 +54,8 @@ const Login = () => {
             className='w-[100%] p-[6px] bg-[olive] rounded text-white font-[500]'
 
           >Login</button>
+
+          <Link to='/'>Back to home</Link>
         </form>
       </div>
     </div>

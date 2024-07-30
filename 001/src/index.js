@@ -9,6 +9,7 @@ import Home from './components/Home';
 import Dummy from './components/Dummy';
 import Login from './components/Login';
 import Context from './assests/Context';
+import Admin from './components/Admin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route path='/' element={<RouteLayout />}>
         <Route path='' element={<Home />} />
         <Route path='dummy' element={<Dummy />} />
+        <Route path='admin' element={<Admin/>}/>
       </Route>
       <Route path='/login' element={<Login />} />
     </>
