@@ -1,0 +1,15 @@
+h1{
+  padding: 20px;
+  background-color: red;
+  text-align: center;
+}
+
+.header{
+  padding: 30px;
+  background-color: aqua;
+  text-align: center;
+}
+
+a{
+  margin: 10px;
+}
