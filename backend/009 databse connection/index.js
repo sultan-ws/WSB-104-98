@@ -42,7 +42,46 @@ const insertdata = async()=>{
 
 };
 
-insertdata();
+// insertdata();
+
+const readData = async()=>{
+    const db = await connection();
+    const admins = db.collection('admins');
+
+    const response = await admins.find().toArray();
+    console.log(response);
+}
+
+readData();
+
+const updatedata = async()=>{
+    const db = await connection();
+    const admins = db.collection('admins');
+
+    const response = await admins.updateOne({name:'hello'},{$set:{name:'updated'}});
+    console.log(response);
+}
+
+// updatedata();
+
+const deleteData = async()=>{
+    const db = await connection();
+    const admins = db.collection('admins');
+
+    const response = await admins.deleteOne({name:'hello'});
+    console.log(response);
+}
+// deleteData();
+
+
+const softDelete = async()=>{
+    const db = await connection();
+    const admins = db.collection('admins');
+
+    const response = await admins.updateOne({name:'hello'},{$set:{deleted_at: Date.now()}});
+    console.log(response);
+}
+// softDelete();
 
 
 app.listen(5200, ()=>{
