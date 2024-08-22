@@ -1,5 +1,6 @@
+const Products = require("../models/users");
 
-const insertData = (req,res)=>{
+const insertData =async (req,res)=>{
     try{
         const data = req.body;
         
@@ -10,10 +11,14 @@ const insertData = (req,res)=>{
        const images = req.files.images.map((fileDetails)=> fileDetails.filename);
        
        data.images = images;
+       const finalData = new Products(data);
 
-       console.log(data);
+    //    console.log(data);
 
-        res.status(200).json({message: 'success'});
+       const response = await finalData.save();
+
+
+        res.status(200).json({message: 'success', data:response});
     }
     catch(error){
         console.log(error);
