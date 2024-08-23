@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
         
         const extentionName = path.extname(file.originalname);
 
-        cb(null, Date.now() + extentionName)
+        cb(null, Date.now() + Math.floor(Math.random() * 10000) + extentionName)
     }
 });
 
