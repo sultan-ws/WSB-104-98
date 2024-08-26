@@ -24,4 +24,4 @@ console.log(filepath);
 
 //deletefile
 
-// fs.unlinkSync(`${filepath}/test.txt`);
+fs.unlinkSync(`${filepath}/test.txt`);
