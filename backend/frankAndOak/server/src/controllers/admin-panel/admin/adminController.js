@@ -1,4 +1,4 @@
-const Admin = require('../../models/admin/admin');
+const Admin = require('./../../../models/admin/admin');
 
 require('dotenv').config();
 
