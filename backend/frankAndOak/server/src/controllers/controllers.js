@@ -1,8 +1,14 @@
 // admin controllers
 
-const { adminLogin } = require('./admin-panel/admin/adminController');
+const { 
+    adminLogin, 
+    genrateOtp, 
+    updateEmail
+} = require('./admin-panel/admin/adminController');
 
 
 module.exports = {
-    adminLogin
+    adminLogin,
+    genrateOtp,
+    updateEmail
 };
