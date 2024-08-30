@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const adminSchema = new mongoose.Schema({
     name:String,
+    profile:String,
     facebook:String,
     insta:String,
     linked_in:String,

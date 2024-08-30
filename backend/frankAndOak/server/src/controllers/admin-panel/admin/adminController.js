@@ -78,10 +78,19 @@ const genrateOtp = async(req, res)=>{
 
 const updateEmail = async(req,res)=>{
     try{
-        const {_id} = req.params;
         const otpDataMap = otpData;
-        console.log(otpDataMap.get('sultan.khan@wscubetech.com'));
-        res.status(200).json({message:'otp has sent'});
+        const sentOtp = otpDataMap.get(req.body.email);
+
+        if(Number(req.body.userotp )!== (sentOtp)) return res.status(401).json({message:'please enter a valid otp'});
+
+        const response = await Admin.updateOne(
+            req.params,
+            {
+                $set:{email:req.body.newemail}
+            }
+        );
+
+        res.status(200).json({message:'email has updated', data: response});
     }
     catch(error){
         console.log(error);
