@@ -1,6 +1,8 @@
 const otpData = require('../../../data/support');
 const Admin = require('./../../../models/admin/admin');
 const nodemailer = require('nodemailer');
+const fs = require('fs');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -98,9 +100,66 @@ const updateEmail = async(req,res)=>{
     }
 }
 
+const updateAdmin = async(req,res)=>{
+
+    const data = req.body;
+
+    const predata = await Admin.findById(req.params._id);
+
+
+    if(req.files){
+        const  filePath = path.join(__dirname,'src','uploads');
+
+        if(req.files.logo){
+            data.logo = req.files.logo[0].filename
+
+            if(fs.existsSync(`${filePath}/${predata[0].logo}`)){
+                fs.unlinkSync(`${filePath}/${predata[0].logo}`)
+            }
+        }
+
+        if(req.files.favicon){
+            data.favicon = req.files.favicon[0].filename
+            if(fs.existsSync(`${filePath}/${predata[0].favicon}`)){
+                fs.unlinkSync(`${filePath}/${predata[0].favicon}`)
+            }
+        }
+
+        if(req.files.footer_icon){
+            data.footer_icon = req.files.footer_icon[0].filename
+            if(fs.existsSync(`${filePath}/${predata[0].footer_icon}`)){
+                fs.unlinkSync(`${filePath}/${predata[0].footer_icon}`)
+            }
+        }
+        if(req.files.profile){
+            data.profile = req.files.profile[0].filename
+            if(fs.existsSync(`${filePath}/${predata[0].profile}`)){
+                fs.unlinkSync(`${filePath}/${predata[0].profile}`)
+            }
+        }
+    }
+
+    console.log(data);
+
+    try{
+        const response = await Admin.updateOne(
+            req.params,
+            {
+                $set:data
+            }
+        )
+        res.status(200).json({ message: 'data updated successfully', data:response});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message: 'internal server error'});
+    }
+};
+
 module.exports = {
     registerAdmin,
     adminLogin,
     genrateOtp,
-    updateEmail
+    updateEmail,
+    updateAdmin
 };

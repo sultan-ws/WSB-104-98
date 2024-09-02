@@ -3,12 +3,14 @@
 const { 
     adminLogin, 
     genrateOtp, 
-    updateEmail
+    updateEmail,
+    updateAdmin
 } = require('./admin-panel/admin/adminController');
 
 
 module.exports = {
     adminLogin,
     genrateOtp,
-    updateEmail
+    updateEmail,
+    updateAdmin
 };
