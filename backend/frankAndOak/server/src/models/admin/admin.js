@@ -12,7 +12,7 @@ const adminSchema = new mongoose.Schema({
     fav_icon: String,
     footer_logo: String,
     password: String,
-    email: String
+    email: String,
 });
 
 const Admin = mongoose.model('admins', adminSchema);

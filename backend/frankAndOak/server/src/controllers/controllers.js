@@ -1,5 +1,4 @@
 // admin controllers
-
 const { 
     adminLogin, 
     genrateOtp, 
@@ -7,10 +6,16 @@ const {
     updateAdmin
 } = require('./admin-panel/admin/adminController');
 
+//parent category controllers
+const { 
+    insertParentCategory 
+} = require('./admin-panel/parent-category/parentCategoryController');
+
 
 module.exports = {
     adminLogin,
     genrateOtp,
     updateEmail,
-    updateAdmin
+    updateAdmin,
+    insertParentCategory
 };
