@@ -8,7 +8,10 @@ const {
 
 //parent category controllers
 const { 
-    insertParentCategory 
+    insertParentCategory, 
+    readParentCategories,
+    updateStatus,
+    readParentCategoryById
 } = require('./admin-panel/parent-category/parentCategoryController');
 
 
@@ -17,5 +20,8 @@ module.exports = {
     genrateOtp,
     updateEmail,
     updateAdmin,
-    insertParentCategory
+    insertParentCategory,
+    readParentCategories,
+    updateStatus,
+    readParentCategoryById
 };
