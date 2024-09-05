@@ -70,9 +70,45 @@ const readParentCategoryById = async(req, res)=>{
     }
 };
 
+const updateParentCategory = async(req, res)=>{
+    try{
+        const {name, description} = req.body;
+        const response = await parentCategory.updateOne(
+            req.params,
+            {
+                $set:{
+                    name,
+                    description
+                }
+            }
+        );
+
+        res.status(200).json({message: 'success', data: response});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message: 'internal server error'});
+    }
+};
+
+
+const deleteParentCategory = async(req, res)=>{
+    try{
+        const response = await parentCategory.deleteOne(req.params);
+
+        res.status(200).json({message: 'success', data: response});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message: 'internal server error'});
+    }
+};
+
 module.exports = {
     insertParentCategory,
     readParentCategories,
     updateStatus,
-    readParentCategoryById
+    readParentCategoryById,
+    updateParentCategory,
+    deleteParentCategory
 }

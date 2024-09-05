@@ -11,7 +11,9 @@ const {
     insertParentCategory, 
     readParentCategories,
     updateStatus,
-    readParentCategoryById
+    readParentCategoryById,
+    updateParentCategory,
+    deleteParentCategory
 } = require('./admin-panel/parent-category/parentCategoryController');
 
 
@@ -23,5 +25,7 @@ module.exports = {
     insertParentCategory,
     readParentCategories,
     updateStatus,
-    readParentCategoryById
+    readParentCategoryById,
+    updateParentCategory,
+    deleteParentCategory
 };
