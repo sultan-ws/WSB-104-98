@@ -104,11 +104,26 @@ const deleteParentCategory = async(req, res)=>{
     }
 };
 
+const multiDeleteParentCategory = async(req, res) => {
+    try{
+        console.log(req.body.ids);
+
+        const response = await parentCategory.deleteMany({ _id: {$in:req.body.ids}})
+
+        res.status(200).json({message:'success', data: response });
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message: 'internal server error'});
+    }
+};
+
 module.exports = {
     insertParentCategory,
     readParentCategories,
     updateStatus,
     readParentCategoryById,
     updateParentCategory,
-    deleteParentCategory
+    deleteParentCategory,
+    multiDeleteParentCategory
 }
