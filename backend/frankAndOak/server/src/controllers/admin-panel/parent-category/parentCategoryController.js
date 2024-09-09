@@ -17,7 +17,9 @@ const insertParentCategory = async(req, res)=>{
     catch(error){
         console.log(error);
 
-        // if(error.code === 11000) return res.status(400).json({message: 'parent category already exists'});
+        if (error.code === 11000 && error.keyPattern && error.keyPattern.name) {
+            return res.status(400).json({message: 'Parent category with this name already exists'});
+        }
         res.status(500).json({message: 'internal server error'});
     }
 };
@@ -118,6 +120,20 @@ const multiDeleteParentCategory = async(req, res) => {
     }
 };
 
+const activeParentCategories = async( req, res ) => {
+    try{
+        const response = await parentCategory.find({status:true});
+
+        if(response.length === 0) return res.status(404).json({message: 'no active categories available'});
+
+        res.status(200).json({message: 'success', data: response});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message: 'internal server error'});
+    }
+};
+
 module.exports = {
     insertParentCategory,
     readParentCategories,
@@ -125,5 +141,6 @@ module.exports = {
     readParentCategoryById,
     updateParentCategory,
     deleteParentCategory,
-    multiDeleteParentCategory
+    multiDeleteParentCategory,
+    activeParentCategories
 }

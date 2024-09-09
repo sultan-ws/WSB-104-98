@@ -14,6 +14,8 @@ function App() {
     }
   };
 
+  console.log(process.env.REACT_APP_API_URL);
+
   useEffect(()=>{checkIfLoggedIn()},[]);
 
   const handleLogin = async (e) => {

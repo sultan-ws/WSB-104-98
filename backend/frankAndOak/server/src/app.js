@@ -1,6 +1,7 @@
 const express = require('express');
 const adminRoutes = require('./routes/admin/admin/admin');
 const parentCategoryRouter = require('./routes/admin/parent-category/parentCategory');
+const productCategoryRoutes = require('./routes/admin/product-category/productCategory');
 
 const allRoutes = express.Router();
 
@@ -12,6 +13,7 @@ const adminRouter = express.Router();
 //admin panel routes
 adminRouter.use('/admin', adminRoutes);
 adminRouter.use('/parent-category', parentCategoryRouter);
+adminRouter.use('/product-category', productCategoryRoutes);
 
 
 //website routes

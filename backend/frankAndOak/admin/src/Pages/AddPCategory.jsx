@@ -1,17 +1,19 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const AddPCategory = () => {
+  const [parentCategories, setParentCategories] = useState([]);
 
-
-  const handleAddCategory = async(e)=>{
-    e.preventDefault();
-    const data = e.target;
-    console.log(process.env.SAMPLE);
+  console.log(process.env.REACT_APP_API_URL);
+  const fetchParentCategoris = async()=>{
 
     try{
-      // const response = await axios
-      // .post('http://localhost:5200/api/admin-panel/parent-category/insert-parent-category')
+      const response = await axios
+      .get(`${process.env.REACT_APP_API_URL}/api/admin-panel/parent-category/active-parent-categories`);
+
+      if(response.status !== 200) return alert(response.data.message);
+      setParentCategories(response.data.data);
+      console.log(response.data.data);
     }
     catch(error){
       console.log(error);
@@ -19,20 +21,36 @@ const AddPCategory = () => {
     }
   };
 
+  useEffect(()=>{fetchParentCategoris()},[]);
+
+  const handleAddCategory = async(e)=>{
+    e.preventDefault();
+    try{
+      const response = await axios
+      .post(`${process.env.REACT_APP_API_URL}/api/admin-panel/product-category/insert-product-category`, e.target);
+
+      console.log(response);
+    }
+    catch(error){
+      console.log(error);
+      alert('something went wrong');
+    }
+  }
+
   return (
     <div className="w-[90%] mx-auto my-[150px] bg-white border rounded-[10px]">
       <span className="bg-[#f8f8f9] rounded-[10px_10px_0_0] border-b p-[8px_16px] text-[20px] font-bold block text-[#303640]">
         Add Category
       </span>
       <div className="w-[90%] mx-auto my-[20px]">
-        <form onSubmit={handleAddCategory} method="post">
+        <form method="post" onSubmit={handleAddCategory}>
           <div className="w-full my-[10px]">
             <label htmlFor="categoryName" className="block text-[#303640]">
               Category Name
             </label>
             <input
               type="text"
-              name="categoryName"
+              name="name"
               id="categoryName"
               placeholder="Category Name"
               className="input border p-1 w-full rounded-[5px] my-[10px]"
@@ -44,10 +62,22 @@ const AddPCategory = () => {
             </label>
             <input
               type="file"
-              name="categoryImg"
+              name="thumbnail"
               id="categoryImg"
               className="input border w-full rounded-[5px] my-[10px] category"
             />
+          </div>
+          <div className="w-full my-[10px]">
+            <label htmlFor="categoryImg" className="block text-[#303640]">
+              Parent Category
+            </label>
+            <select name="parent_category" id="" className="border w-full rounded-[5px] my-[10px] category input">
+              {
+                parentCategories.map((category, index)=>(
+                  <option key={index} value={category._id}>{category.name}</option>
+                ))
+              }
+            </select>
           </div>
           <div className="w-full my-[10px]">
             <label htmlFor="categoryDesc" className="block text-[#303640]">
@@ -55,7 +85,7 @@ const AddPCategory = () => {
             </label>
             <textarea
               type="file"
-              name="categoryDesc"
+              name="description"
               id="categoryDesc"
               className="input border w-full rounded-[5px] my-[10px]"
             />
@@ -69,18 +99,17 @@ const AddPCategory = () => {
             </label>
             <input
               type="radio"
-              name="categoryStatus"
+              name="status"
               id="categoryStatus"
-              value="0"
+              value={true}
               className="input my-[10px] mx-[10px] accent-[#5351c9] cursor-pointer"
             />
             <span>Display</span>
             <input
               type="radio"
-              name="categoryStatus"
+              name="status"
               id="categoryStatus"
-              value="1"
-              checked
+              value={false}
               className="input my-[10px] mx-[10px] accent-[#5351c9] cursor-pointer"
             />
             <span>Hide</span>
