@@ -9,6 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/frankandoak-files', express.static('src/uploads'));
 app.use('/api', allRoutes);
 
 

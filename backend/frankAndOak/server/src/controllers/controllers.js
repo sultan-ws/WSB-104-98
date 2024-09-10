@@ -20,7 +20,8 @@ const {
 
 //product category controllers
 const { 
-    insertProductCategory
+    insertProductCategory,
+    viewProductCategory
  } = require('./admin-panel/product-category/productCategoryControllers');
 
 
@@ -37,5 +38,6 @@ module.exports = {
     deleteParentCategory,
     multiDeleteParentCategory,
     activeParentCategories,
-    insertProductCategory
+    insertProductCategory,
+    viewProductCategory
 };

@@ -11,7 +11,7 @@ const productCategorySchema = new mongoose.Schema({
     thumbnail:String,
     parent_category:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'parentCategory',      
+        ref: 'parent_categories',      
         required:true,
     },
     description:String,
