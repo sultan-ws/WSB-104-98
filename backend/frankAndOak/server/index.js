@@ -12,9 +12,6 @@ app.use(express.json());
 app.use('/frankandoak-files', express.static('src/uploads'));
 app.use('/api', allRoutes);
 
-
-
-
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running on port', process.env.PORT);
 });

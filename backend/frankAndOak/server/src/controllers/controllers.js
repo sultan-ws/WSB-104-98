@@ -5,6 +5,7 @@ const {
     updateEmail,
     updateAdmin
 } = require('./admin-panel/admin/adminController');
+const { trueColors } = require('./admin-panel/color/colorControllers');
 
 //parent category controllers
 const { 
@@ -21,8 +22,13 @@ const {
 //product category controllers
 const { 
     insertProductCategory,
-    viewProductCategory
+    viewProductCategory,
+    activeProductCategory
  } = require('./admin-panel/product-category/productCategoryControllers');
+
+ // product controllers
+const { addProduct } = require('./admin-panel/product/productControllers');
+const { viewSizes } = require('./admin-panel/size/sizeControllers');
 
 
 module.exports = {
@@ -39,5 +45,9 @@ module.exports = {
     multiDeleteParentCategory,
     activeParentCategories,
     insertProductCategory,
-    viewProductCategory
+    viewProductCategory,
+    viewSizes,
+    trueColors,
+    activeProductCategory,
+    addProduct
 };
