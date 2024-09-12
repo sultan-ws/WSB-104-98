@@ -88,7 +88,20 @@ const AddProduct = () => {
   const handleAddProduct = async(e) => {
     e.preventDefault();
 
-    const formdata = e.target;
+    const formdata = new FormData(e.target);
+    formdata.append('colors', JSON.stringify(checkedColors));
+    formdata.append('sizes', JSON.stringify(checkedSizes));
+
+    try{
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/admin-panel/product/add-product`, formdata);
+
+      console.log(response);
+
+    }
+    catch(error){
+      console.log(error);
+
+    }
 
     console.log(checkedSizes);
     console.log(checkedColors);
@@ -327,7 +340,7 @@ const AddProduct = () => {
               type="radio"
               name="status"
               id="status"
-              value="0"
+              value={true}
               className="my-[10px] mx-[20px] accent-[#5351c9]"
             />
             <span>Display</span>
@@ -335,9 +348,8 @@ const AddProduct = () => {
               type="radio"
               name="status"
               id="status"
-              value="1"
+              value={false}
               className="my-[10px] mx-[20px] accent-[#5351c9]"
-              checked
             />
             <span>Hide</span>
           </div>

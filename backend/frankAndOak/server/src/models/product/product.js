@@ -41,6 +41,18 @@ const productSchema = new mongoose.Schema({
     }
 });
 
+productSchema.pre('save', (next)=>{
+    this.created_at = new Date();
+
+    next();
+});
+
+productSchema.pre('updateOne', (next)=>{
+    this.updated_at = new Date();
+
+    next();
+})
+
 
 const Product = mongoose.model('products', productSchema);
 

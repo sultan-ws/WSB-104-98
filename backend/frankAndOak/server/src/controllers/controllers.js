@@ -27,7 +27,12 @@ const {
  } = require('./admin-panel/product-category/productCategoryControllers');
 
  // product controllers
-const { addProduct } = require('./admin-panel/product/productControllers');
+const { 
+    addProduct,
+    readProducts 
+} = require('./admin-panel/product/productControllers');
+
+
 const { viewSizes } = require('./admin-panel/size/sizeControllers');
 
 
@@ -49,5 +54,6 @@ module.exports = {
     viewSizes,
     trueColors,
     activeProductCategory,
-    addProduct
+    addProduct,
+    readProducts
 };
