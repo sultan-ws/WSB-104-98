@@ -102,9 +102,6 @@ const AddProduct = () => {
       console.log(error);
 
     }
-
-    console.log(checkedSizes);
-    console.log(checkedColors);
   };
   return (
     <div className="w-[90%] mx-auto my-[150px] bg-white rounded-[10px] border">

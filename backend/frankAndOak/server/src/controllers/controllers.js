@@ -16,7 +16,8 @@ const {
     updateParentCategory,
     deleteParentCategory,
     multiDeleteParentCategory,
-    activeParentCategories
+    activeParentCategories,
+    searchParentCategories
 } = require('./admin-panel/parent-category/parentCategoryController');
 
 //product category controllers
@@ -55,5 +56,6 @@ module.exports = {
     trueColors,
     activeProductCategory,
     addProduct,
-    readProducts
+    readProducts,
+    searchParentCategories
 };

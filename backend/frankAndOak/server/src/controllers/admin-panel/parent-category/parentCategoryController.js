@@ -1,4 +1,6 @@
 const parentCategory = require("../../../models/parent-category/parentCategory");
+const ProductCategory = require("../../../models/product-category/productCategory");
+const Product = require("../../../models/product/product");
 
 const insertParentCategory = async(req, res)=>{
     try{
@@ -98,6 +100,14 @@ const deleteParentCategory = async(req, res)=>{
     try{
         const response = await parentCategory.deleteOne(req.params);
 
+        const prePrdoctCategories = await ProductCategory.find({parent_category: req.params._id});
+
+        await ProductCategory.deleteMany({parent_category: req.params._id});
+
+        const idsToDelete = prePrdoctCategories.map((productCat)=>(productCat._id));
+
+        await Product.deleteMany({category: {$in: idsToDelete}});
+
         res.status(200).json({message: 'success', data: response});
     }
     catch(error){
@@ -134,6 +144,23 @@ const activeParentCategories = async( req, res ) => {
     }
 };
 
+const searchParentCategories = async(req, res)=>{
+    try{
+        // const response = await parentCategory.find({name: {$regex: new RegExp('e')}}); 
+        
+        const response = await parentCategory.find({$or: [
+            {name: {$regex : new RegExp(req.params.key)}},
+            {description: {$regex : new RegExp(req.params.key)}}
+        ]}); 
+        
+        res.status(200).json({message:'success', data: response});
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({message: 'internal server error'});
+    }
+};
+
 module.exports = {
     insertParentCategory,
     readParentCategories,
@@ -142,5 +169,6 @@ module.exports = {
     updateParentCategory,
     deleteParentCategory,
     multiDeleteParentCategory,
-    activeParentCategories
+    activeParentCategories,
+    searchParentCategories
 }

@@ -6,6 +6,11 @@ export default function Home() {
     hello
     <Link href='/about'>abput</Link>
         <Link href='/contact'>Contact</Link>
+        <div>
+          {
+            process.env.NEXT_PUBLIC_HELLO
+          }
+        </div>
    </div>
   );
 }
