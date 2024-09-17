@@ -36,6 +36,9 @@ const {
 
 const { viewSizes } = require('./admin-panel/size/sizeControllers');
 
+//user controllers
+const { registerUser } = require('./website/users/userControllers');
+
 
 module.exports = {
     adminLogin,
@@ -57,5 +60,6 @@ module.exports = {
     activeProductCategory,
     addProduct,
     readProducts,
-    searchParentCategories
+    searchParentCategories,
+    registerUser
 };

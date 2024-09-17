@@ -1,5 +1,6 @@
 const express = require('express');
 const { insertParentCategory, readParentCategories, updateStatus, readParentCategoryById, updateParentCategory, deleteParentCategory, multiDeleteParentCategory, activeParentCategories, searchParentCategories } = require('../../../controllers/controllers');
+const verifyAuth = require('../../../middlewares/verifyJwt');
 
 const parentCategoryRouter = express.Router();
 
@@ -11,6 +12,6 @@ parentCategoryRouter.put('/update-parent-category/:_id', updateParentCategory);
 parentCategoryRouter.delete('/delete-parentcategory/:_id', deleteParentCategory);
 parentCategoryRouter.post('/multi-delete-parent-category', multiDeleteParentCategory);
 parentCategoryRouter.get('/active-parent-categories', activeParentCategories);
-parentCategoryRouter.get('/search-category/:key', searchParentCategories);
+parentCategoryRouter.get('/search-category/:key', verifyAuth, searchParentCategories);
 
 module.exports = parentCategoryRouter;

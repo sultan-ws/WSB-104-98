@@ -5,6 +5,7 @@ const productCategoryRoutes = require('./routes/admin/product-category/productCa
 const sizeRoutes = require('./routes/admin/size/size');
 const colorRoutes = require('./routes/admin/color/color');
 const productRouter = require('./routes/admin/product/product');
+const userRouter = require('./routes/website/user/user');
 
 const allRoutes = express.Router();
 
@@ -22,7 +23,7 @@ adminRouter.use('/color', colorRoutes);
 adminRouter.use('/product', productRouter);
 
 //website routes
-
+websiteRouter.use('/user', userRouter);
 
 
 
