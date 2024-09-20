@@ -37,4 +37,4 @@ const viewCart = async (req, res)=>{
 module.exports = {
     addProductToCart,
     viewCart
-}
+};
